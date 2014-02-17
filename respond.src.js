@@ -49,6 +49,9 @@ window.matchMedia = window.matchMedia || (function( doc, undefined ) {
 
   //define update even in native-mq-supporting browsers, to avoid errors
   respond.update = function(){};
+  
+  //define callback after all stylesheets have been processed
+  respond.callback = function(){};
 
   //expose media query support flag for external use
   respond.mediaQueriesSupported  = win.matchMedia && win.matchMedia( "only all" ).matches;
@@ -125,6 +128,8 @@ window.matchMedia = window.matchMedia || (function( doc, undefined ) {
           // we prevent "Stack overflow" error in IE7
           win.setTimeout(function(){ makeRequests(); },0);
         } );
+      }else{
+        respond.callback();
       }
     },
     
